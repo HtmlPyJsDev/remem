@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Семейные Медиа</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .upload-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        input[type="file"] {
+            margin: 10px 0;
+        }
+        .media {
+            width: 100%;
+            max-width: 600px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .media-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Семейные Медиа</h1>
+
+<div class="upload-container">
+    <h2>Загрузите ваше видео или изображение</h2>
+    <input type="file" id="mediaInput" accept="video/*,image/*">
+    <button onclick="uploadMedia()">Загрузить</button>
+</div>
+
+<div id="mediaContainer" class="media-container"></div>
+
+<script>
+    function uploadMedia() {
+        const input = document.getElementById('mediaInput');
+        const file = input.files[0];
+
+        if (file) {
+            const formData = new FormData();
+            formData.append('media', file);
+
+            fetch('http://localhost:3000/upload', { // Убедитесь, что этот URL совпадает с вашим сервером
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                displayMedia(data.url, file.type);
+            })
+            .catch(err => alert('Ошибка: ' + err));
+        } else {
+            alert('Пожалуйста, выберите видео или изображение для загрузки.');
+        }
+    }
+
+    function displayMedia(url, type) {
+        const mediaContainer = document.getElementById('mediaContainer');
+        let mediaElement;
+
+        if (type.startsWith('video/')) {
+            mediaElement = document.createElement('video');
+            mediaElement.controls = true;
+            mediaElement.src = url;
+        } else if (type.startsWith('image/')) {
+            mediaElement = document.createElement('img');
+            mediaElement.src = url;
+        }
+
+        mediaElement.classList.add('media');
+        mediaContainer.appendChild(mediaElement);
+    }
+</script>
+
+</body>
+</html>
