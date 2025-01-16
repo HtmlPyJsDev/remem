@@ -1,96 +1,585 @@
 <!DOCTYPE html>
 <html lang="uz">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Семейные Медиа</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chortoq 6-maktab</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f0f0f0;
-            margin: 0;
-            padding: 20px;
-            text-align: center;
+      :root {
+        --primary-color: #3498db;
+        --secondary-color: #2980b9;
+        --accent-color: #e74c3c;
+        --text-color: #333;
+        --bg-color: #ecf0f1;
+        --white: #ffffff;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        background-color: var(--bg-color);
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      header {
+        background-color: var(--primary-color);
+        color: var(--white);
+        padding: 1rem 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      header.scrolled {
+        padding: 0.5rem 0;
+        background-color: rgba(52, 152, 219, 0.9);
+      }
+
+      header .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-decoration: none;
+        color: var(--white);
+        display: flex;
+        align-items: center;
+      }
+
+      .logo svg {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+      }
+
+      nav ul {
+        list-style-type: none;
+        display: flex;
+      }
+
+      nav ul li {
+        margin-left: 20px;
+      }
+
+      nav ul li a {
+        color: var(--white);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+        position: relative;
+      }
+
+      nav ul li a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background-color: var(--white);
+        transition: width 0.3s ease;
+      }
+
+      nav ul li a:hover::after {
+        width: 100%;
+      }
+
+      .hero {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        color: var(--white);
+        text-align: center;
+        padding: 10rem 0 8rem;
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        animation: fadeInUp 1s ease;
+      }
+
+      .hero p {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        animation: fadeInUp 1s ease 0.2s;
+        animation-fill-mode: both;
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: var(--accent-color);
+        color: var(--white);
+        padding: 0.8rem 2rem;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        animation: fadeInUp 1s ease 0.4s;
+        animation-fill-mode: both;
+      }
+
+      .btn:hover {
+        background-color: #c0392b;
+        transform: translateY(-3px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .section {
+        padding: 6rem 0;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: var(--primary-color);
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "";
+        display: block;
+        width: 50px;
+        height: 3px;
+        background-color: var(--accent-color);
+        margin: 10px auto 0;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+
+      .info-item {
+        background-color: var(--white);
+        padding: 2rem;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .info-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .info-item i {
+        font-size: 3rem;
+        color: var(--accent-color);
+        margin-bottom: 1rem;
+      }
+
+      .info-item h3 {
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .info-item p {
+        color: #666;
+      }
+
+      .news-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .news-item {
+        background-color: var(--white);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .news-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .news-item img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .news-content {
+        padding: 1.5rem;
+      }
+
+      .news-content h3 {
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+      }
+
+      .news-content p {
+        color: #666;
+        margin-bottom: 1rem;
+      }
+
+      .teachers-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+
+      .teacher-card {
+        background-color: var(--white);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .teacher-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .teacher-image {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+      }
+
+      .teacher-info {
+        padding: 1.5rem;
+        text-align: center;
+      }
+
+      .teacher-info h3 {
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+      }
+
+      .teacher-info p {
+        color: #666;
+      }
+
+      footer {
+        background-color: var(--primary-color);
+        color: var(--white);
+        padding: 4rem 0 2rem;
+        clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+      }
+
+      .footer-item h3 {
+        color: var(--accent-color);
+        margin-bottom: 1rem;
+      }
+
+      .footer-item ul {
+        list-style-type: none;
+      }
+
+      .footer-item ul li {
+        margin-bottom: 0.5rem;
+      }
+
+      .footer-item ul li a {
+        color: #ccc;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-item ul li a:hover {
+        color: var(--accent-color);
+      }
+
+      .social-links a {
+        color: var(--white);
+        margin-right: 15px;
+        font-size: 1.2rem;
+        transition: color 0.3s ease;
+      }
+
+      .social-links a:hover {
+        color: var(--accent-color);
+      }
+
+      .copyright {
+        text-align: center;
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid #555;
+        font-size: 0.9rem;
+        color: #ccc;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
         }
-        h1 {
-            color: #333;
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
-        .upload-container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
+      }
+
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.5rem;
         }
-        input[type="file"] {
-            margin: 10px 0;
+        .hero p {
+          font-size: 1rem;
         }
-        .media {
-            width: 100%;
-            max-width: 600px;
-            margin-top: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        .section-title {
+          font-size: 2rem;
         }
-        .media-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <a href="#" class="logo">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          </svg>
+          Chortoq 6-maktab
+        </a>
+        <nav>
+          <ul>
+            <li><a href="#home">Bosh sahifa</a></li>
+            <li><a href="#about">Maktab haqida</a></li>
+            <li><a href="#news">Yangiliklar</a></li>
+            <li><a href="#teachers">O'qituvchilar</a></li>
+            <li><a href="#contacts">Aloqa</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-<h1>Семейные Медиа</h1>
+    <section class="hero" id="home">
+      <div class="container">
+        <h1>Chortoq 6-maktabga xush kelibsiz</h1>
+        <p>Biz ta'lim orqali yorqin kelajakni yaratamiz</p>
+        <a href="#about" class="btn">Ko'proq bilish</a>
+      </div>
+    </section>
 
-<div class="upload-container">
-    <h2>Загрузите ваше видео или изображение</h2>
-    <input type="file" id="mediaInput" accept="video/*,image/*">
-    <button onclick="uploadMedia()">Загрузить</button>
-</div>
+    <section class="section" id="about">
+      <div class="container">
+        <h2 class="section-title">Maktabimiz raqamlarda</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <i class="fas fa-book"></i>
+            <h3>30+ fanlar</h3>
+            <p>Keng qamrovli o'quv dasturlari</p>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-users"></i>
+            <h3>500+ o'quvchilar</h3>
+            <p>Katta va do'stona maktab jamoasi</p>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-calendar-alt"></i>
+            <h3>50+ tadbirlar</h3>
+            <p>Faol sinfdan tashqari hayot</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<div id="mediaContainer" class="media-container"></div>
+    <section class="section" id="news">
+      <div class="container">
+        <h2 class="section-title">So'nggi yangiliklar</h2>
+        <div class="news-grid">
+          <div class="news-item">
+            <img
+              src="https://picsum.photos/seed/news1/400/200"
+              alt="Ochiq eshiklar kuni"
+            />
+            <div class="news-content">
+              <h3>Ochiq eshiklar kuni</h3>
+              <p>15 may 2023</p>
+              <a href="#" class="btn">Batafsil</a>
+            </div>
+          </div>
+          <div class="news-item">
+            <img
+              src="https://picsum.photos/seed/news2/400/200"
+              alt="Shahar olimpiadasida g'alaba"
+            />
+            <div class="news-content">
+              <h3>Shahar olimpiadasida g'alaba</h3>
+              <p>3 may 2023</p>
+              <a href="#" class="btn">Batafsil</a>
+            </div>
+          </div>
+          <div class="news-item">
+            <img
+              src="https://picsum.photos/seed/news3/400/200"
+              alt="Yozgi lager"
+            />
+            <div class="news-content">
+              <h3>Yozgi lager: ro'yxatdan o'tish ochiq</h3>
+              <p>28 aprel 2023</p>
+              <a href="#" class="btn">Batafsil</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<script>
-    function uploadMedia() {
-        const input = document.getElementById('mediaInput');
-        const file = input.files[0];
+    <section class="section" id="teachers">
+      <div class="container">
+        <h2 class="section-title">Bizning O'qituvchilar</h2>
+        <div class="teachers-grid">
+          <div class="teacher-card">
+            <img
+              src="https://picsum.photos/seed/teacher1/400/400"
+              alt="O'qituvchi 1"
+              class="teacher-image"
+            />
+            <div class="teacher-info">
+              <h3>Bobayeva Mahfuza</h3>
+              <p>biologiya o'qituvchisi</p>
+            </div>
+          </div>
+          <div class="teacher-card">
+            <img
+              src="https://picsum.photos/seed/teacher2/400/400"
+              alt="O'qituvchi 2"
+              class="teacher-image"
+            />
+            <div class="teacher-info">
+              <h3>Fozilova Gulnora</h3>
+              <p>Informatika o'qituvchisi</p>
+            </div>
+          </div>
+          <div class="teacher-card">
+            <img
+              src="https://picsum.photos/seed/teacher3/400/400"
+              alt="O'qituvchi 3"
+              class="teacher-image"
+            />
+            <div class="teacher-info">
+              <h3>Kimdir</h3>
+              <p>Ingliz tili o'qituvchisi</p>
+            </div>
+          </div>
+          <div class="teacher-card">
+            <img
+              src="https://picsum.photos/seed/teacher4/400/400"
+              alt="O'qituvchi 4"
+              class="teacher-image"
+            />
+            <div class="teacher-info">
+              <h3>Kimdir</h3>
+              <p>Fizika o'qituvchisi</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        if (file) {
-            const formData = new FormData();
-            formData.append('media', file);
+    <footer id="contacts">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-item">
+            <h3>Chortoq 6-maktab</h3>
+            <p>Manzil: Maktab ko'chasi, 123, Chortoq, Namangan</p>
+            <p>Telefon: +998 69 123-45-67</p>
+            <p>Email: info@chartak6maktab.uz</p>
+          </div>
+          <div class="footer-item">
+            <h3>Tezkor havolalar</h3>
+            <ul>
+              <li><a href="#about">Maktab haqida</a></li>
+              <li><a href="#news">Yangiliklar</a></li>
+              <li><a href="#teachers">O'qituvchilar</a></li>
+              <li><a href="#contacts">Aloqa</a></li>
+            </ul>
+          </div>
+          <div class="footer-item">
+            <h3>Bizni kuzatib boring</h3>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <p>&copy; 2023 Chortoq 6-maktab. Barcha huquqlar himoyalangan.</p>
+        </div>
+      </div>
+    </footer>
 
-            fetch('http://localhost:3000/upload', { // Убедитесь, что этот URL совпадает с вашим сервером
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => response.json())
-            .then(data => {
-                displayMedia(data.url, file.type);
-            })
-            .catch(err => alert('Ошибка: ' + err));
-        } else {
-            alert('Пожалуйста, выберите видео или изображение для загрузки.');
-        }
-    }
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const header = document.querySelector("header");
+        const scrollThreshold = 100;
 
-    function displayMedia(url, type) {
-        const mediaContainer = document.getElementById('mediaContainer');
-        let mediaElement;
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > scrollThreshold) {
+            header.classList.add("scrolled");
+          } else {
+            header.classList.remove("scrolled");
+          }
+        });
 
-        if (type.startsWith('video/')) {
-            mediaElement = document.createElement('video');
-            mediaElement.controls = true;
-            mediaElement.src = url;
-        } else if (type.startsWith('image/')) {
-            mediaElement = document.createElement('img');
-            mediaElement.src = url;
-        }
-
-        mediaElement.classList.add('media');
-        mediaContainer.appendChild(mediaElement);
-    }
-</script>
-
-</body>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute("href")).scrollIntoView({
+              behavior: "smooth",
+            });
+          });
+        });
+      });
+    </script>
+  </body>
 </html>
